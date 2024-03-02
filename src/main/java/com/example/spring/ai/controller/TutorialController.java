@@ -12,12 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class TutorialController {
     private final ChatClient chatClient;
@@ -25,24 +26,7 @@ public class TutorialController {
     private final OpenAiImageClient openAiImageClient;
 
 
-    @GetMapping
-    public String showMainForm(Model model) {
-        model.addAttribute("keyword", "");
-        model.addAttribute("description","");
-        return "index";
-    }
 
-    @GetMapping("/textForm")
-    public String showForm(Model model) {
-        model.addAttribute("keyword", "");
-        model.addAttribute("description","");
-        return "tutorials";
-    }
-    @GetMapping("/imageForm")
-    public String showImageForm(Model model) {
-        model.addAttribute("keyword", "");
-        return "imageSearch";
-    }
     @GetMapping("/tutorials")
     public String chatOpenAI(Model model, @RequestParam("keyword") String keyword) {
         model.addAttribute("keyword", keyword);
